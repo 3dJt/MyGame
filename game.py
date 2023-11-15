@@ -9,7 +9,6 @@ tk.wm_attributes('-topmost', 1)
 canvas = Canvas(tk, width=500, height=400, highlightthickness=0)
 canvas.pack()
 tk.update()
-
 class Ball:
     def __init__(self, canvas, paddle, score, color):
         self.canvas = canvas
@@ -60,16 +59,14 @@ class Paddle:
         self.canvas_width = self.canvas.winfo_width()
         self.canvas.bind_all('<KeyPress-Right>', self.turn_right)
         self.canvas.bind_all('<KeyPress-Left>', self.turn_left)
-
+        self.started = False
+        self.canvas.bind_all('<KeyPress-Return>', self.start_game)
     def turn_right(self, event):
         self.x = 2
-
     def turn_left(self, event):
         self.x = -2
-
     def start_game(self, event):
         self.started = True
-
     def draw(self):
         self.canvas.move(self.id, self.x, 0)
         pos = self.canvas.coords(self.id)
